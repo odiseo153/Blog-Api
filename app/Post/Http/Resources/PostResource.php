@@ -23,7 +23,8 @@ class PostResource extends JsonResource
                 'updated_at' => $this->updated_at,
             ],
             'author' => $this->author ,
-            'comments' => $this->comments 
+            'comments' => $this->comments,
+            'tags' => $this->tags
         ];
     }
 }

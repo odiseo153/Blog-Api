@@ -59,8 +59,8 @@ class PostController extends BaseController
     public function addTagToPost(AddTagToPostRequest $request) 
     {
         $data = $request->validated();
-        $id = $data['id_post'];
-        $tag = $data['id_tag'];
+        $id = $data['post_id'];
+        $tag = $data['tag_id'];
         $posts = $this->addToTagToPostService->execute($id,$tag);
         return new PostResource($posts);
     }

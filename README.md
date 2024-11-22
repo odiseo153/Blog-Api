@@ -1,66 +1,134 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# **Documentación del Proyecto - Blog Platform (Backend)**
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## **Visión General**
+Este proyecto es una plataforma de blogs que expone una API para la gestión y consulta de publicaciones. Los usuarios pueden crear, gestionar y categorizar publicaciones, así como interactuar con ellas mediante comentarios, etiquetas y categorías. La arquitectura implementada es **hexagonal**, lo que permite una separación clara entre las responsabilidades de las entidades y sus respectivas lógicas.
 
-## About Laravel
+Este sistema está orientado exclusivamente al **backend**, sin integración con un frontend, y está optimizado para ofrecer un servicio robusto y escalable mediante **Spatie Query Builder** para filtros avanzados.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+---
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## **Características Principales**
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### **Roles y Permisos**
+- **Roles**:
+  - `Admin`: Gestión completa de publicaciones, comentarios, categorías, etiquetas y usuarios.
+  - `Author`: Puede gestionar únicamente sus propias publicaciones y responder a comentarios.
+  - `Reader`: Tiene acceso a consultar publicaciones y agregar comentarios.
+- **Permisos**:
+  - Gestionados mediante el paquete **Spatie Laravel Permission**, garantizando un control de acceso robusto y flexible.
 
-## Learning Laravel
+---
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+### **Gestión de Publicaciones**
+1. **CRUD**:
+   - Crear, actualizar, leer y eliminar publicaciones.
+   - Los autores tienen acceso restringido a sus propias publicaciones.
+2. **Categorías y Etiquetas**:
+   - Organización de publicaciones mediante categorías predefinidas y etiquetas dinámicas.
+   - Relación **muchos a muchos** entre publicaciones y etiquetas.
+3. **Publicaciones Destacadas**:
+   - Soporte para marcar publicaciones como destacadas.
+4. **Filtros Avanzados**:
+   - Búsqueda y filtrado flexible utilizando **Spatie Query Builder**:
+     - Filtros por categorías, etiquetas, autor, rango de fechas, popularidad, entre otros.
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+---
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### **Comentarios**
+1. **CRUD de Comentarios**:
+   - Los usuarios pueden agregar, actualizar y eliminar comentarios.
+   - Los comentarios están anidados, permitiendo respuestas jerárquicas.
+2. **Moderación**:
+   - Los administradores pueden gestionar todos los comentarios.
 
-## Laravel Sponsors
+---
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+### **Interacciones con las Publicaciones**
+1. **Reacciones**:
+   - Los usuarios pueden dar "me gusta" a las publicaciones.
+2. **Conteo de Vistas**:
+   - Seguimiento del número de vistas por publicación.
+3. **Listados Populares y Recientes**:
+   - Orden por popularidad (likes y vistas) y fecha de creación.
 
-### Premium Partners
+---
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+### **Notificaciones**
+- Notificaciones del sistema para eventos clave, como nuevos comentarios en una publicación.
 
-## Contributing
+---
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+## **Arquitectura**
+El proyecto implementa la **arquitectura hexagonal**, asegurando una separación clara entre:
+1. **Capa de Dominio**:
+   - Contiene las reglas de negocio de cada entidad: Publicaciones, Comentarios, Categorías y Etiquetas.
+2. **Capa de Aplicación**:
+   - Orquesta los casos de uso de las entidades, como la creación de publicaciones o la asignación de etiquetas.
+3. **Adaptadores**:
+   - API REST para exponer los servicios al cliente.
+   - Interacción con la base de datos mediante Eloquent ORM.
 
-## Code of Conduct
+---
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+## **Estructura de la Base de Datos**
+1. **Tablas principales**:
+   - `users`: Almacena los usuarios y sus roles.
+   - `posts`: Detalles de las publicaciones.
+   - `categories`: Categorías predefinidas.
+   - `tags`: Etiquetas dinámicas.
+   - `post_tag`: Tabla pivot para la relación entre publicaciones y etiquetas.
+   - `comments`: Comentarios asociados a publicaciones.
+   - `likes`: Registro de "me gusta" en publicaciones.
+   - `views`: Seguimiento de vistas por publicación.
 
-## Security Vulnerabilities
+---
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+### **Pasos para Clonar y Ejecutar el Proyecto**
 
-## License
+1. Clona el repositorio desde GitHub:
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+```bash
+git clone https://github.com/odiseo153/Blog-Api.git
+cd Blog-Api
+```
+
+2. Instala las dependencias:
+
+```bash
+composer install
+```
+
+3. Configura el archivo de entorno:
+
+```bash
+cp .env.example .env
+php artisan key:generate
+```
+
+4. Configura la base de datos en el archivo `.env` y migra las tablas:
+
+```bash
+php artisan migrate
+```
+
+5. Arranca el servidor local:
+
+```bash
+php artisan serve
+```
+
+El proyecto estará disponible en [http://localhost:8000](http://localhost:8000).
+
+---
+
+## **Tecnologías y Paquetes**
+- **Laravel Sanctum**: Autenticación y protección de rutas.
+- **Spatie Laravel Permission**: Gestión de roles y permisos.
+- **Spatie Query Builder**: Búsquedas y filtros avanzados en los endpoints.
+- **Eloquent ORM**: Interacción con la base de datos.
+- **PHPUnit**: Pruebas unitarias y funcionales.
+
+---
+
+## **Resultado Final**
+El sistema proporciona un backend robusto y escalable para la gestión de blogs. La arquitectura hexagonal garantiza mantenibilidad y adaptabilidad para futuras expansiones.

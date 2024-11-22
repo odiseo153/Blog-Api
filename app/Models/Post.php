@@ -67,6 +67,13 @@ class Post extends BaseModel
     });
   }
 
+  public function scopeTagName($query, $search)
+  {
+    return $query->whereHas('tags', function ($query) use ($search) {
+        $query->where('name', 'like', "%$search%");
+    });
+  }
+
   public function scopePublishedAfter($query, $date)
   {
       return $query->where('publish_date', '>=', $date);

@@ -10,6 +10,7 @@ use Spatie\QueryBuilder\AllowedSort;
 use Spatie\QueryBuilder\AllowedFilter;
 use App\Shared\Repositories\BaseRepository;
 use App\Post\Domain\Contracts\PostRepositoryPort;
+use App\Post\Sorts\TagNameSort;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
 
@@ -27,6 +28,7 @@ class PostRepository extends BaseRepository implements PostRepositoryPort
             AllowedSort::field('content'),
             AllowedSort::field('publish_date'),
             AllowedSort::custom('user_name',new UserNameSort),
+            AllowedSort::custom('tag_name',new TagNameSort),
         ];
 
         $filters = [
@@ -34,6 +36,7 @@ class PostRepository extends BaseRepository implements PostRepositoryPort
             AllowedFilter::scope('content'),
             AllowedFilter::scope('author_name'),
             AllowedFilter::scope('category_name'),
+            AllowedFilter::scope('tag_name'),
         ];
 
 
