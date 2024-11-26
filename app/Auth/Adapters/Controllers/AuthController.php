@@ -2,12 +2,13 @@
 
 namespace App\Auth\Adapters\Controllers;
 
-use App\Auth\Domain\Services\LoginService;
-use App\Auth\Domain\Services\LogoutService;
 use App\Auth\Domain\Services\MeService;
 use App\Auth\Http\Requests\LoginRequest;
+use App\Auth\Domain\Services\LoginService;
+use App\Shared\Controllers\BaseController;
+use App\Auth\Domain\Services\LogoutService;
 
-class AuthController
+class AuthController extends BaseController
 {
     private LoginService $loginService;
     private LogoutService $logoutService;
@@ -18,12 +19,13 @@ class AuthController
         $this->loginService = $loginService;
         $this->logoutService = $logoutService;
         $this->meService = $meService;
-    }
+    } 
 
 
     public function login(LoginRequest $request)
     {
-        $user = $this->loginService->execute($request->email, $request->password);
+        $data=$request->validated();
+        $user = $this->loginService->execute($request['username'], $request['password']);
         return response()->json($user, 200);
     }
 
