@@ -25,11 +25,12 @@ class DatabaseSeeder extends Seeder
         // Usuarios
         
         User::factory(1)-> create([
-            'name' => 'test',
+            'name' => 'test user',
+            'username' => 'test',
             'email' => 'test@example.com',
-            'password' => bcrypt('12345'), // default password
+            'password' => bcrypt('password'), // default password
             'role' => 'admin'
-        ]);
+        ]); 
         
 
         $users = User::factory(15)->create();

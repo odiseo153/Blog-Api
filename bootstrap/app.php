@@ -25,6 +25,7 @@ return Application::configure(basePath: dirname(__DIR__))
             __DIR__ . '/../routes/posts.php',
             __DIR__ . '/../routes/users.php',
             __DIR__ . '/../routes/comments.php',
+            __DIR__ . '/../routes/likes.php',
         ],
         
     )

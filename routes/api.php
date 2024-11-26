@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AuthController;
+use App\Auth\Adapters\Controllers\AuthController;
 
 Route::middleware('auth')->group(function () {
     // Define any routes that require authentication here

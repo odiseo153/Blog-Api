@@ -2,8 +2,9 @@
 
 namespace App\Auth\Domain\Services;
 
-use App\Auth\Domain\Contracts\AuthRepositoryPort;
 use App\Auth\Domain\Entities\User;
+use Illuminate\Support\Facades\Log;
+use App\Auth\Domain\Contracts\AuthRepositoryPort;
 
 class LoginService
 {
@@ -14,9 +15,9 @@ class LoginService
         $this->authRepository = $authRepository;
     }
 
-    public function execute(string $email, string $password): array
+    public function execute(string $username, string $password): array
     {
-        $user = new User($email, $password);
+        $user = new User($username, $password);
         return $this->authRepository->login($user);
     }
 }

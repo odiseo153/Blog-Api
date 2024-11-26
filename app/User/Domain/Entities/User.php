@@ -6,6 +6,7 @@ class User
 {
     public $id;
     public $name;
+    public $username;
     public $email;
     public $password;
     public $role;
@@ -17,6 +18,7 @@ class User
     {
         $this->id = $data['id'] ?? null;
         $this->name = $data['name'];
+        $this->username = $data['username'];
         $this->email = $data['email'] ?? null;
         $this->password = $data['password'] ?? null;
         $this->posts = $data['posts'] ?? null;

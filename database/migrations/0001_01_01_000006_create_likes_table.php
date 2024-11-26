@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('likes', function (Blueprint $table) {
             $table->ulid('id')->primary();
-            $table->dateTime('like_date');
+            $table->dateTime('like_date')->default(now());
             $table->ulid('user_id');
             $table->ulid('post_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
