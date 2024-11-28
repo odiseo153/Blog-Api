@@ -7,5 +7,6 @@ return [
     App\Comment\CommentServiceProvider::class,
     App\Like\LikeServiceProvider::class,
     App\Auth\AuthServiceProvider::class,
+    App\Category\CategoryServiceProvider::class,
 ];
   

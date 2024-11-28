@@ -2,15 +2,16 @@
 
 namespace App\Post\Adapters\Repositories;
 
+use App\Post\Sorts\TagNameSort;
+use App\Post\Sorts\UserNameSort;
 use App\Models\Post as PostModel;
 use App\Post\Domain\Entities\Post;
-use App\Post\Sorts\UserNameSort;
 use Illuminate\Support\Facades\Log;
+use App\Post\Sorts\CategoryNameSort;
 use Spatie\QueryBuilder\AllowedSort;
 use Spatie\QueryBuilder\AllowedFilter;
 use App\Shared\Repositories\BaseRepository;
 use App\Post\Domain\Contracts\PostRepositoryPort;
-use App\Post\Sorts\TagNameSort;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
 
@@ -28,6 +29,7 @@ class PostRepository extends BaseRepository implements PostRepositoryPort
             AllowedSort::field('content'),
             AllowedSort::field('publish_date'),
             AllowedSort::custom('user_name',new UserNameSort),
+            AllowedSort::custom('category',new CategoryNameSort),
             AllowedSort::custom('tag_name',new TagNameSort),
         ];
 
